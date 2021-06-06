@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 import requests
 from datetime import datetime
 # from app.action.telegram import Telegram
@@ -31,18 +33,20 @@ class EmartManager:
             })
             res_json = response.json()
             result = res_json['dataList']
-            # print(type(result))
+            print(result)
 
             data = []
             for res in result:
-                data.append({
-                    'name': res['NAME'],
-                    'holiday1': res['HOLIDAY_DAY1_YYYYMMDD'],
-                    'holiday2': res['HOLIDAY_DAY2_YYYYMMDD'],
-                    'holiday3': res['HOLIDAY_DAY3_YYYYMMDD']
-                })
+                # data.append({
+                #     'name': res['NAME'],
+                #     'holiday1': res['HOLIDAY_DAY1_YYYYMMDD'],
+                #     'holiday2': res['HOLIDAY_DAY2_YYYYMMDD'],
+                #     'holiday3': res['HOLIDAY_DAY3_YYYYMMDD']
+                # })
 
-            # print(data)
+                data.append(f"name: {res['NAME']}, holi1: {res['HOLIDAY_DAY1_YYYYMMDD']}, holi2: {res['HOLIDAY_DAY2_YYYYMMDD']}, holi2: {res['HOLIDAY_DAY3_YYYYMMDD']}")
+
+            print(data)
 
             return data
         except Exception as e:
