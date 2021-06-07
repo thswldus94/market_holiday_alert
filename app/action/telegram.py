@@ -18,26 +18,33 @@ class Telegram:
         self.config = config
 
     def start(self, update, context):
-        print(context.__dict__)
-        context.bot.send_message(chat_id=update.effective_chat.id, text="아씨 이마트 언제쉬냐?")
+        context.bot.send_message(chat_id=update.effective_chat.id, text="아씨 마트 언제쉬냐?")
 
     def echo(self, update, context):
         user_id = update.effective_chat.id
         user_text = update.message.text
 
         split_list = user_text.split()
+        if len(split_list) < 2:
+            context.bot.send_message(chat_id=user_id, text="마트 번호와 지점명을 입력해주세요. ex) 1 분당")
+            return False
+
         market_type = split_list[0]
         market_name = split_list[1]
+
+        if market_type is None or market_name is None:
+            context.bot.send_message(chat_id=user_id, text="마트 번호와 지점명을 입력해주세요. ex) 1 분당")
+            return False
 
         if market_type == '1':
             manager = EmartManager(self.config.EMART_BASE_URL)
             manager.market_name = market_name
 
             result = manager.get_holiday()
-            print(result)
-
             for res in result:
                 context.bot.send_message(chat_id=user_id, text=res)
+        else:
+            context.bot.send_message(chat_id=user_id, text="준비중입니다")
 
     def send_message(self, chat_id, text):
         self.bot.sendMessage(chat_id=chat_id, text=text)
