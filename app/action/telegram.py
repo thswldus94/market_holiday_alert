@@ -38,13 +38,15 @@ class Telegram:
 
         if market_type == '1':
             manager = EmartManager(self.config.EMART_BASE_URL)
-            manager.market_name = market_name
-
-            result = manager.get_holiday()
-            for res in result:
-                context.bot.send_message(chat_id=user_id, text=res)
+        elif market_type == '2':
+            manager = LotteManager(self.config.LOTTE_BASE_URL)
         else:
             context.bot.send_message(chat_id=user_id, text="준비중입니다")
+
+        manager.market_name = market_name
+        result = manager.get_holiday()
+        for res in result:
+            context.bot.send_message(chat_id=user_id, text=res)
 
     def send_message(self, chat_id, text):
         self.bot.sendMessage(chat_id=chat_id, text=text)

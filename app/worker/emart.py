@@ -37,14 +37,12 @@ class EmartManager:
 
             data = []
             for res in result:
-                # data.append({
-                #     'name': res['NAME'],
-                #     'holiday1': res['HOLIDAY_DAY1_YYYYMMDD'],
-                #     'holiday2': res['HOLIDAY_DAY2_YYYYMMDD'],
-                #     'holiday3': res['HOLIDAY_DAY3_YYYYMMDD']
-                # })
+                name = res['NAME']
+                holi1 = res['HOLIDAY_DAY1_YYYYMMDD']
+                holi2 = res['HOLIDAY_DAY2_YYYYMMDD']
+                holi3 = res['HOLIDAY_DAY3_YYYYMMDD']
 
-                data.append(f"name: {res['NAME']}, holi1: {res['HOLIDAY_DAY1_YYYYMMDD']}, holi2: {res['HOLIDAY_DAY2_YYYYMMDD']}, holi2: {res['HOLIDAY_DAY3_YYYYMMDD']}")
+                data.append(f"name: {name}, holi1: {holi1}, holi2: {holi2}, holi2: {holi3}")
 
             print(data)
 
